@@ -21,11 +21,15 @@ namespace BruteForce
             Console.Clear();
             Console.SetCursorPosition(0, 4);
 
+            Console.ForegroundColor = ConsoleColor.White;
+
 
 
             Console.Write("         Enter a password to brute force: ");
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
             _passwordToBruteForce = Console.ReadLine() ?? string.Empty;
+            Console.ForegroundColor = ConsoleColor.White;
 
             if (_passwordToBruteForce.Equals(string.Empty) || _passwordToBruteForce.Equals(null))
             {
@@ -34,7 +38,11 @@ namespace BruteForce
 
 
 
+            Console.CursorVisible = false;
+
             bruteForce();
+
+            Console.CursorVisible = true;
 
 
 
@@ -49,6 +57,8 @@ namespace BruteForce
             }
 
             Console.CursorVisible = true;
+
+
 
             goto LabelMethodEntry;
         }
@@ -111,17 +121,36 @@ namespace BruteForce
         /// <returns> true if the password is correct, false if the password is incorrect </returns>
         static bool CheckPassword(List<char> passwordAttempt)
         {
-            StringBuilder attempt = new StringBuilder();
+            StringBuilder attempt = new();
 
             foreach (char letter in passwordAttempt)
             {
                 attempt.Append(letter);
             }
 
-            Console.WriteLine(attempt);
+
+
+            Console.SetCursorPosition(0, 6);
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("         Attempt: ");
+
+
 
             if (attempt.Equals(_passwordToBruteForce))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(attempt);
+                Console.ForegroundColor = ConsoleColor.White;
+
                 return true;
+            }
+
+
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(attempt);
+            Console.ForegroundColor = ConsoleColor.White;
 
             return false;
         }
@@ -167,7 +196,7 @@ namespace BruteForce
                 }
                 else
                     return -1;
-            }
+                }
 
             return index;
 
