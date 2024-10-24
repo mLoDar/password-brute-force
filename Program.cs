@@ -1,19 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
+using System.Collections.Generic;
+
+
+
+
 
 namespace BruteForce
 {
     class Program
     {
+        private static string _passwordToBruteForce;
 
-        public static string password = "abc";
-        static void Main(string[] args)
+
+
+        static void Main()
         {
+        LabelMethodEntry:
+
+            Console.Clear();
+            Console.SetCursorPosition(0, 4);
+
+
+
+            Console.Write("         Enter a password to brute force: ");
+
+            _passwordToBruteForce = Console.ReadLine() ?? string.Empty;
+
+            if (_passwordToBruteForce.Equals(string.Empty) || _passwordToBruteForce.Equals(null))
+            {
+                goto LabelMethodEntry;
+            }
+
+
 
             bruteForce();
 
-            Console.ReadKey();
+
+
+            Console.WriteLine("                                                    ");
+            Console.WriteLine("         Press any key to contine, exit with ESC ...");
+
+            Console.CursorVisible = false;
+
+            if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+            {
+                Environment.Exit(0);
+            }
+
+            Console.CursorVisible = true;
+
+            goto LabelMethodEntry;
         }
 
         static void bruteForce()
@@ -83,7 +120,7 @@ namespace BruteForce
 
             Console.WriteLine(attempt);
 
-            if (attempt.Equals(password))
+            if (attempt.Equals(_passwordToBruteForce))
                 return true;
 
             return false;
